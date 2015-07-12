@@ -1,0 +1,31 @@
+/* 
+    Document   : master_list
+    Created on : Feb 1, 2011, 11:26:44 AM
+    Author     : agusw
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body {background-color:#ffcc99;}
+h1 {color:maroon;font-size:14pt;}
+hr {color:navy;}
+p {font-size:11pt;margin-left:15px;}
+a:link {color:green;}
+a:visited {color:yellow;}
+a:hover {color:black;}
+a:active {color:blue;}
+table
+{
+border-collapse:collapse;
+width:100%;
+}
+table, th, td
+{
+border: 1px solid black;
+height:10px;
+}
