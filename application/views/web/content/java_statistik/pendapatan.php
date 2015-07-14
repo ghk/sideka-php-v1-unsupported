@@ -111,24 +111,24 @@
                 name: "Belanja",
                 colorByPoint: true,
                 data: [{
-                    name: "Bidang Penyelenggaraan Pemerintahan Desa",
+                    name: "Penyelenggaraan Pemerintahan Desa",
                     y: 56.33,
                     drilldown: "Bidang Penyelenggaraan Pemerintahan Desa"
                 },
                     {
-                        name: "Bidang Pelaksanaan Pembangunan Desa",
+                        name: "Pelaksanaan Pembangunan Desa",
                         y: 56.33,
                         drilldown: "Bidang Pelaksanaan Pembangunan Desa"
                     }
                     ,
                     {
-                        name: "Bidang Pembinaan Kemasyarakatan",
+                        name: "Pembinaan Kemasyarakatan",
                         y: 56.33,
                         drilldown: "Bidang Pembinaan Kemasyarakatan"
                     }
                     ,
                     {
-                        name: "Bidang Pemberdayaan Masyarakat",
+                        name: "Pemberdayaan Masyarakat",
                         y: 56.33,
                         drilldown: "Bidang Pemberdayaan Masyarakat"
                     }
@@ -252,3 +252,207 @@
     });
 </script>
 
+<script>
+    $(function () {
+        $('#containerstackbelanja').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Belanja Desa 2015'
+            },
+            xAxis: {
+                categories: ['Bidang Penyelenggaraan Pemerintahan     Desa', 'Bidang Pelaksanaan Pembangunan Desa', 'Bidang Pembinaan Kemasyarakatan', 'Bidang Pemberdayaan Masyarakat', 'Bidang Tak Terduga']
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Rupiah'
+                },
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                    }
+                }
+            },
+            legend: {
+                align: 'right',
+                x: -30,
+                verticalAlign: 'top',
+                y: 25,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.x + '</b><br/>' +
+                        this.series.name + ': ' + this.y + '<br/>' +
+                        'Total: ' + this.point.stackTotal;
+                }
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                        style: {
+                            textShadow: '0 0 3px black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Belum Terealisasi',
+                data: [35000000, 80000000, 20000000,10000000,5000000]
+            }, {
+                name: 'Realisasi',
+                data: [215000000, 50000000, 10000000,8000000,2000000]
+            }]
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $('#containerbasicpendapatan').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Pendapatan Desa Per Bulan'
+            },
+            subtitle: {
+                text: 'Pendapatan'
+            },
+            xAxis: {
+                categories: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Jumlah dalam Rupiah (Rp)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Pendapatan Asli Desa',
+                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+            }, {
+                name: 'Pendapatan Transfer',
+                data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+
+            }, {
+                name: 'Pendapatan Lain lain',
+                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+            }]
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $('#containerbasicbelanja').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Belanja Desa Per Bulan'
+            },
+            subtitle: {
+                text: 'Belanja'
+            },
+            xAxis: {
+                categories: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Jumlah dalam Rupiah (Rp)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Bidang Penyelenggaraan Pemerintahan Desa',
+                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+            }, {
+                name: 'Bidang Pelaksanaan Pembangunan Desa',
+                data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+
+            }, {
+                name: 'Bidang Pembinaan Kemasyarakatan',
+                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+            }, {
+                name: 'Bidang Pemberdayaan Masyarakat',
+                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+            }, {
+                name: 'Bidang Tak Terduga',
+                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+            }]
+        });
+    });
+</script>
