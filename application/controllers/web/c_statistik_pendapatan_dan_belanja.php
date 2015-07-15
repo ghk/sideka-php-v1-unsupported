@@ -5,22 +5,22 @@ class C_statistik_pendapatan_dan_belanja extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('statistik/m_pekerjaan');
+		$this->load->model('statistik/m_pendapatan_dan_belanja');
 		$this->load->model('m_logo');
 	}
 
 	function index()
 	{
 		////////////////////////////////////////////////////////
-		$pekerjaan[] = $this->m_pekerjaan->getDataPekerjaan();
+		$pekerjaan[] = $this->m_pendapatan_dan_belanja->getDataPekerjaan();
 		$json = json_encode($pekerjaan);
-		$json =	$this->m_pekerjaan->highchartJson($json);
+		$json =	$this->m_pendapatan_dan_belanja->highchartJson($json);
 		$data['json'] = $json;
 		////////////////////////////////////////////////////////
 
-		$data['result'] = $this->m_pekerjaan->getDataPekerjaanTable();
+		$data['result'] = $this->m_pendapatan_dan_belanja->getDataPekerjaanTable();
 
-		$data['jumlah'] = $this->m_pekerjaan->getJumlahPekerjaan();
+		$data['jumlah'] = $this->m_pendapatan_dan_belanja->getJumlahPekerjaan();
 
 		$data['konten_logo'] = $this->m_logo->getLogo();
 		$data['logo'] = $this->load->view('v_logo', $data, TRUE);
