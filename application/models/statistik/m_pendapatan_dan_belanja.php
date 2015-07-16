@@ -8,35 +8,33 @@ class M_pendapatan_dan_belanja extends CI_Model {
 		$this->load->library('subquery');
 	}
 
-	function getDataPekerjaan(){
-		$this->db->select('ref_pekerjaan.deskripsi as jenis,count(tbl_penduduk.id_pekerjaan) as jumlah');
-
-		/* $sub = $this->subquery->start_subquery('select');
-		$sub->select ('count(*)')->from('tbl_penduduk');
-		$sub->where('id_jen_kel','1');
-		$sub->where('tbl_penduduk.id_pekerjaan = ref_pekerjaan.id_pekerjaan');
-		$this->subquery->end_subquery('laki');
-
-		$sub = $this->subquery->start_subquery('select');
-		$sub->select ('count(*)')->from('tbl_penduduk');
-		$sub->where('id_jen_kel','2');
-		$sub->where('tbl_penduduk.id_pekerjaan = ref_pekerjaan.id_pekerjaan');
-		$this->subquery->end_subquery('perempuan'); */
-
-		$this->db->from('tbl_penduduk');
-		$this->db->join('ref_pekerjaan','ref_pekerjaan.id_pekerjaan = tbl_penduduk.id_pekerjaan','left');
-		$this->db->group_by("ref_pekerjaan.deskripsi");
+	function getDataPiePendapatan(){
+		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_akun.jumlah * 100 /(select sum(jumlah) from tbl_akun, tbl_apbdes where tbl_akun.id_apbdes = tbl_apbdes.id_apbdes and tbl_apbdes.nama = "Pendapatan") as jumlah');
+		$this->db->from('tbl_akun');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
+		$this->db->where('tbl_apbdes.nama = "Pendapatan"');
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	function getDataPekerjaanTable(){
-		$this->db->select('nama');
-		$this->db->from('tbl_apbdes');
+	function getDataPieBelanja(){
+		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_akun.jumlah * 100 /(select sum(jumlah) from tbl_akun, tbl_apbdes where tbl_akun.id_apbdes = tbl_apbdes.id_apbdes and tbl_apbdes.nama = "Belanja") as jumlah');
+		$this->db->from('tbl_akun');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
+		$this->db->where('tbl_apbdes.nama = "Belanja"');
 		$query = $this->db->get();
 		return $query->result();
 	}
 
+	function getDataAkunTable(){
+		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_akun.jumlah as jumlah');
+		$this->db->from('tbl_akun');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
+		$this->db->where('tbl_apbdes.nama = "Pendapatan"');
+		$query = $this->db->get();
+		return $query->result();
+	}
+/**
 	function getJumlahPekerjaan(){
 		$this->db->select('id_pekerjaan,deskripsi');
 		$this->db->from('ref_pekerjaan');
@@ -64,10 +62,10 @@ class M_pendapatan_dan_belanja extends CI_Model {
 		}
 		return $array;
 	}
-
+**/
 	function highchartJson($json)
 	{
-		$deskripsi = '"jenis":';
+		$deskripsi = '"nama_akun":';
 		$jumlah = '"jumlah":';
 		$petikdua = '"'	;
 		$json = str_replace($deskripsi, "", strval($json));

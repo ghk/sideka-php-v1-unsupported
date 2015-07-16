@@ -11,16 +11,18 @@ class C_statistik_pendapatan_dan_belanja extends CI_Controller {
 
 	function index()
 	{
-		////////////////////////////////////////////////////////
-		$pekerjaan[] = $this->m_pendapatan_dan_belanja->getDataPekerjaan();
-		$json = json_encode($pekerjaan);
+
+		$pendapatan[] = $this->m_pendapatan_dan_belanja->getDataPiePendapatan();
+		$json = json_encode($pendapatan);
 		$json =	$this->m_pendapatan_dan_belanja->highchartJson($json);
 		$data['json'] = $json;
-		////////////////////////////////////////////////////////
+		$belanja[] = $this->m_pendapatan_dan_belanja->getDataPieBelanja();
+		$json2 = json_encode($belanja);
+		$json2 =	$this->m_pendapatan_dan_belanja->highchartJson($json2);
+		$data['json2'] = $json2;
 
-		$data['result'] = $this->m_pendapatan_dan_belanja->getDataPekerjaanTable();
-
-		$data['jumlah'] = $this->m_pendapatan_dan_belanja->getJumlahPekerjaan();
+		//$data['result'] = $this->m_pendapatan_dan_belanja->getDataAkunPendapatan();
+		//$data['jumlah'] = $this->m_pendapatan_dan_belanja->getJumlahPekerjaan();
 
 		$data['konten_logo'] = $this->m_logo->getLogo();
 		$data['logo'] = $this->load->view('v_logo', $data, TRUE);

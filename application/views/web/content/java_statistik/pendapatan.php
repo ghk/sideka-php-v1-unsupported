@@ -33,7 +33,8 @@
             series: [{
                 name: "Pendapatan",
                 colorByPoint: true,
-                data: [{
+                data: <?php echo $json; ?>
+                   /** [{
                     name: "Pendapatan Asli Desa",
                     y: 56.33,
                     drilldown: "Pendapatan Asli Desa"
@@ -46,6 +47,7 @@
                     y: 10.38,
                     drilldown: "Pendapatan Lain lain"
                 }]
+                **/
             }],
             drilldown: {
                 series: [{
@@ -110,7 +112,8 @@
             series: [{
                 name: "Belanja",
                 colorByPoint: true,
-                data: [{
+                data:  <?php echo $json2; ?>
+                    /**[{
                     name: "Penyelenggaraan Pemerintahan Desa",
                     y: 56.33,
                     drilldown: "Bidang Penyelenggaraan Pemerintahan Desa"
@@ -139,6 +142,7 @@
                         drilldown: "Bidang Tak Terduga"
                     }
                 ]
+                     **/
             }],
             drilldown: {
                 series: [{
