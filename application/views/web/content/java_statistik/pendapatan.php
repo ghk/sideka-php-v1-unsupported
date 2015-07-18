@@ -247,10 +247,10 @@
             },
             series: [{
                 name: 'Belum Terealisasi',
-                data: [25000, 80000, 20000]
+                data: <?php echo $jsonstackbelumrealisasi; ?>
             }, {
                 name: 'Realisasi',
-                data: [75000, 50000, 10000]
+                data: <?php echo $jsonstackrealisasi; ?>
             }]
         });
     });

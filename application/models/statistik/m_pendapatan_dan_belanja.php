@@ -17,6 +17,26 @@ class M_pendapatan_dan_belanja extends CI_Model {
 		return $query->result();
 	}
 
+	function getDataStackPendapatanRealisasi(){
+		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_realisasi.jumlah as jumlah');
+		$this->db->from('tbl_akun');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
+		$this->db->join('tbl_realisasi','tbl_realisasi.id_akun = tbl_akun.id_akun','right');
+		$this->db->where('tbl_apbdes.nama = "Pendapatan"');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDataStackPendapatanBelumRealisasi(){
+		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_akun.jumlah - tbl_realisasi.jumlah as jumlah');
+		$this->db->from('tbl_akun');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
+		$this->db->join('tbl_realisasi','tbl_realisasi.id_akun = tbl_akun.id_akun','right');
+		$this->db->where('tbl_apbdes.nama = "Pendapatan"');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	function getDataPieBelanja(){
 		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_akun.jumlah * 100 /(select sum(jumlah) from tbl_akun, tbl_apbdes where tbl_akun.id_apbdes = tbl_apbdes.id_apbdes and tbl_apbdes.nama = "Belanja") as jumlah');
 		$this->db->from('tbl_akun');
@@ -67,6 +87,24 @@ class M_pendapatan_dan_belanja extends CI_Model {
 	{
 		$deskripsi = '"nama_akun":';
 		$jumlah = '"jumlah":';
+		$petikdua = '"'	;
+		$json = str_replace($deskripsi, "", strval($json));
+		$json = str_replace($jumlah, "", strval($json));
+		$json = str_replace("{", "[", strval($json));
+		$json = str_replace("}", "]", strval($json));
+		$json = str_replace("[[", "[", strval($json));
+		$json = str_replace("]]", "]", strval($json));
+		$json = str_replace($petikdua, "'", strval($json));
+		$json = str_replace(",'", ",", strval($json));
+		$json = str_replace("']", "]", strval($json));
+
+		return $json;
+	}
+
+	function highchartJson2($json)
+	{
+		$deskripsi = '"nama_akun2":';
+		$jumlah = '"jumlah2":';
 		$petikdua = '"'	;
 		$json = str_replace($deskripsi, "", strval($json));
 		$json = str_replace($jumlah, "", strval($json));

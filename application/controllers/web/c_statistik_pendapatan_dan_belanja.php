@@ -11,15 +11,26 @@ class C_statistik_pendapatan_dan_belanja extends CI_Controller {
 
 	function index()
 	{
-
+		//piechart pendapatan
 		$pendapatan[] = $this->m_pendapatan_dan_belanja->getDataPiePendapatan();
 		$json = json_encode($pendapatan);
 		$json =	$this->m_pendapatan_dan_belanja->highchartJson($json);
 		$data['json'] = $json;
+		//piechart belanja
 		$belanja[] = $this->m_pendapatan_dan_belanja->getDataPieBelanja();
 		$json2 = json_encode($belanja);
 		$json2 =	$this->m_pendapatan_dan_belanja->highchartJson($json2);
 		$data['json2'] = $json2;
+		//stackchart pendapatan realisasi
+		$pendapatanstackrealisasi[] = $this->m_pendapatan_dan_belanja->getDataStackPendapatanRealisasi();
+		$jsonstackrealisasi = json_encode($pendapatanstackrealisasi);
+		$jsonstackrealisasi =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackrealisasi);
+		$data['jsonstackrealisasi'] = $jsonstackrealisasi;
+		//stackchart pendapatan belum di realisasi
+		$pendapatanstackbelumrealisasi[] = $this->m_pendapatan_dan_belanja->getDataStackPendapatanBelumRealisasi();
+		$jsonstackbelumrealisasi = json_encode($pendapatanstackbelumrealisasi);
+		$jsonstackbelumrealisasi =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackbelumrealisasi);
+		$data['jsonstackbelumrealisasi'] = $jsonstackbelumrealisasi;
 
 		//$data['result'] = $this->m_pendapatan_dan_belanja->getDataAkunPendapatan();
 		//$data['jumlah'] = $this->m_pendapatan_dan_belanja->getJumlahPekerjaan();
