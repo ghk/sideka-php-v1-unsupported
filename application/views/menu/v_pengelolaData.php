@@ -138,6 +138,26 @@
 						</div>
 						</li>
 						<!------------------------------------------------------------------------------------>
+
+						<!---------------------DROPDOWN 5--------------------------------------------------------------->
+						<li class="dropdownmenu">
+						<a id="a-data-apbdes" class="collapsed" data-toggle="collapse" href="#apbdes">
+						<i class="fa fa-bank fa-fw"></i> APBDes <span class="fa arrow"></span></a>
+						<div id="apbdes" class="collapse">
+							<ul id="yw6" class="nav nav-pills nav-stacked nav-second-level">								
+								<li id="nav-apbdes" class="">	
+									<a href="<?php echo site_url('apbdes/c_apbdes/');?>">APBDes</a>
+								</li>										
+								<li id="nav-anggaran" class="">
+									<a href="<?php echo site_url('apbdes/c_anggaran/');?>">Anggaran</a>		
+								</li>
+								<li id="nav-realisasi" class="">
+									<a href="<?php echo site_url('apbdes/c_realisasi/');?>">Realisasi</a>		
+								</li>									
+							</ul>
+						</div>
+						</li>
+						<!------------------------------------------------------------------------------------>
 						
 						
 						<!---------------------DROPDOWN 6--------------------------------------------------------------->

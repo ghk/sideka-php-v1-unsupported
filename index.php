@@ -10,7 +10,7 @@
  * For more info visit:  http://www.php.net/error_reporting
  *
  */
-	error_reporting(0);
+error_reporting(0);
 	
 
 /*
