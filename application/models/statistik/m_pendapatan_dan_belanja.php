@@ -9,47 +9,66 @@ class M_pendapatan_dan_belanja extends CI_Model {
 	}
 
 	function getDataPiePendapatan(){
-		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_akun.jumlah * 100 /(select sum(jumlah) from tbl_akun, tbl_apbdes where tbl_akun.id_apbdes = tbl_apbdes.id_apbdes and tbl_apbdes.nama = "Pendapatan") as jumlah');
-		$this->db->from('tbl_akun');
-		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
-		$this->db->where('tbl_apbdes.nama = "Pendapatan"');
+		$this->db->select('tbl_anggaran.nama as nama_akun, (tbl_anggaran.jumlah * 100) /(select sum(jumlah) from tbl_anggaran, tbl_apbdes where tbl_anggaran.id_apbdes = tbl_apbdes.id_apbdes and tbl_anggaran.tipe_apbdes = 0 and tbl_anggaran.id_parent is null ) as jumlah');
+		$this->db->from('tbl_anggaran');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_anggaran.id_apbdes ','right');
+		$this->db->where('tbl_anggaran.tipe_apbdes = 0 and tbl_anggaran.id_parent is null ');
 		$query = $this->db->get();
 		return $query->result();
 	}
-
+	function getDataPieBelanja(){
+		$this->db->select('tbl_anggaran.nama as nama_akun, (tbl_anggaran.jumlah * 100) /(select sum(jumlah) from tbl_anggaran, tbl_apbdes where tbl_anggaran.id_apbdes = tbl_apbdes.id_apbdes and tbl_anggaran.tipe_apbdes = 1 and tbl_anggaran.id_parent is null ) as jumlah');
+		$this->db->from('tbl_anggaran');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_anggaran.id_apbdes ','right');
+		$this->db->where('tbl_anggaran.tipe_apbdes = 1 and tbl_anggaran.id_parent is null ');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	function getDataStackPendapatanRealisasi(){
-		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_realisasi.jumlah as jumlah');
-		$this->db->from('tbl_akun');
-		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
-		$this->db->join('tbl_realisasi','tbl_realisasi.id_akun = tbl_akun.id_akun','right');
-		$this->db->where('tbl_apbdes.nama = "Pendapatan"');
+		$this->db->select('tbl_anggaran.nama as nama_akun, tbl_realisasi.jumlah as jumlah');
+		$this->db->from('tbl_anggaran');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_anggaran.id_apbdes','right');
+		$this->db->join('tbl_realisasi','tbl_realisasi.id_anggaran = tbl_anggaran.id_anggaran','right');
+		$this->db->where('tbl_anggaran.tipe_apbdes = 0 and tbl_anggaran.id_parent is null ');
 		$query = $this->db->get();
 		return $query->result();
 	}
 
 	function getDataStackPendapatanBelumRealisasi(){
-		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_akun.jumlah - tbl_realisasi.jumlah as jumlah');
-		$this->db->from('tbl_akun');
-		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
-		$this->db->join('tbl_realisasi','tbl_realisasi.id_akun = tbl_akun.id_akun','right');
-		$this->db->where('tbl_apbdes.nama = "Pendapatan"');
+		$this->db->select('tbl_anggaran.nama as nama_akun, tbl_anggaran.jumlah - tbl_realisasi.jumlah as jumlah');
+		$this->db->from('tbl_anggaran');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_anggaran.id_apbdes','right');
+		$this->db->join('tbl_realisasi','tbl_realisasi.id_anggaran = tbl_anggaran.id_anggaran','right');
+		$this->db->where('tbl_anggaran.tipe_apbdes = 0 and tbl_anggaran.id_parent is null ');
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	function getDataPieBelanja(){
-		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_akun.jumlah * 100 /(select sum(jumlah) from tbl_akun, tbl_apbdes where tbl_akun.id_apbdes = tbl_apbdes.id_apbdes and tbl_apbdes.nama = "Belanja") as jumlah');
-		$this->db->from('tbl_akun');
-		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
-		$this->db->where('tbl_apbdes.nama = "Belanja"');
+	function getDataStackBelanjaRealisasi(){
+		$this->db->select('tbl_anggaran.nama as nama_akun, tbl_realisasi.jumlah as jumlah');
+		$this->db->from('tbl_anggaran');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_anggaran.id_apbdes','right');
+		$this->db->join('tbl_realisasi','tbl_realisasi.id_anggaran = tbl_anggaran.id_anggaran','right');
+		$this->db->where('tbl_anggaran.tipe_apbdes = 1 and tbl_anggaran.id_parent is null ');
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	function getDataStackBelanjaBelumRealisasi(){
+		$this->db->select('tbl_anggaran.nama as nama_akun, tbl_anggaran.jumlah - tbl_realisasi.jumlah as jumlah');
+		$this->db->from('tbl_anggaran');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_anggaran.id_apbdes','right');
+		$this->db->join('tbl_realisasi','tbl_realisasi.id_anggaran = tbl_anggaran.id_anggaran','right');
+		$this->db->where('tbl_anggaran.tipe_apbdes = 1 and tbl_anggaran.id_parent is null ');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 
 	function getDataAkunTable(){
-		$this->db->select('tbl_akun.nama_akun as nama_akun, tbl_akun.jumlah as jumlah');
-		$this->db->from('tbl_akun');
-		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_akun.id_apbdes','right');
+		$this->db->select('tbl_anggaran.nama as nama_akun, tbl_anggaran.jumlah as jumlah');
+		$this->db->from('tbl_anggaran');
+		$this->db->join('tbl_apbdes','tbl_apbdes.id_apbdes = tbl_anggaran.id_apbdes','right');
 		$this->db->where('tbl_apbdes.nama = "Pendapatan"');
 		$query = $this->db->get();
 		return $query->result();

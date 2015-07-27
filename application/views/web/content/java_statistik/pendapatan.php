@@ -313,10 +313,10 @@
             },
             series: [{
                 name: 'Belum Terealisasi',
-                data: [35000000, 80000000, 20000000,10000000,5000000]
+                data: <?php echo $jsonstackbelanjabelumrealisasi; ?>
             }, {
                 name: 'Realisasi',
-                data: [215000000, 50000000, 10000000,8000000,2000000]
+                data: <?php echo $jsonstackbelanjarealisasi; ?>
             }]
         });
     });
