@@ -9,7 +9,7 @@
 
 	<!-- Text input-->
 	<div class="form-group">
-		<label  class="col-md-3 control-label" for="id_realisasi">Id Anggaran</label>
+		<label  class="col-md-3 control-label" for="id_anggaran">Id Anggaran</label>
 		<div class="col-md-9">
 			<input   id="id_anggaran" name="id_anggaran" type="number" placeholder="Id Anggaran" class="form-control input-md">
 			<span class="help-block"><?php echo form_error('id_anggaran', '<p class="field_error">','</p>')?></span>

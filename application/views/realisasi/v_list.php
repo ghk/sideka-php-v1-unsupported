@@ -8,7 +8,7 @@ echo $js_grid;
 <script type="text/javascript">
 var _base_url = '<?= base_url() ?>';
 
-function edit_anggaran(id) {
+function edit_realisasi(id) {
   window.location = _base_url + 'apbdes/c_realisasi/edit/' + id;
 }
 

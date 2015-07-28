@@ -82,7 +82,7 @@ class C_realisasi extends CI_Controller {
 				$row->id_anggaran,
 				$row->tanggal,
 				$row->jumlah,
-				'<button type="submit" class="btn btn-default btn-xs" title="Edit" onclick="edit_apbdes(\''.$row->id_realisasi.'\')"/><i class="fa fa-pencil"></i></button>'
+				'<button type="submit" class="btn btn-default btn-xs" title="Edit" onclick="edit_realisasi(\''.$row->id_realisasi.'\')"/><i class="fa fa-pencil"></i></button>'
 			);  
 		}
 		//Print please
@@ -128,6 +128,7 @@ class C_realisasi extends CI_Controller {
     }
 
     function edit($id){
+
 		$session['hasil'] = $this->session->userdata('logged_in');
 		$role = $session['hasil']->role;
 		if($this->session->userdata('logged_in') AND $role == 'Pengelola Data')
@@ -142,8 +143,8 @@ class C_realisasi extends CI_Controller {
 			redirect('c_login', 'refresh');
     }
 	
-	function update() {	
-	
+	function update() {
+		echo "asdasdasd";
 		$id = $this->input->post('id_apbdes', TRUE);
 		$tahun = $this->input->post('tahun', TRUE);
 		$is_perubahan = $this->input->post('is_perubahan', TRUE);
