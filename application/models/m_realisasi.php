@@ -1,10 +1,10 @@
 <?php
-class M_apbdes extends CI_Model {
+class M_realisasi extends CI_Model {
 
    function __construct()
   {
     parent::__construct();
-    $this->_table='tbl_apbdes';
+    $this->_table='tbl_realisasi';
 	
     //get instance
     $this->CI = get_instance();
@@ -13,15 +13,15 @@ class M_apbdes extends CI_Model {
     {
         //Build contents query
         $this->db->select('*')->from($this->_table);
-        $this->db->where('id_apbdes !=', 0);
+        $this->db->where('id_realisasi !=', 0);
         $this->CI->flexigrid->build_query();
 
         //Get contents
         $return['records'] = $this->db->get();
 
         //Build count query
-        $this->db->select("count(id_apbdes) as record_count")->from($this->_table);
-        $this->db->where('id_apbdes !=', 0);
+        $this->db->select("count(id_realisasi) as record_count")->from($this->_table);
+        $this->db->where('id_realisasi !=', 0);
         $this->CI->flexigrid->build_query(FALSE);
         $record_count = $this->db->get();
         $row = $record_count->row();
@@ -39,13 +39,13 @@ class M_apbdes extends CI_Model {
   
   function delete($id)
   {
-    $this->db->where('id_apbdes', $id);
+    $this->db->where('id_realisasi', $id);
     $this->db->delete($this->_table);
   }
   
   function getById($id) //edit
   {	
-    return $this->db->get_where($this->_table,array('id_apbdes' => $id))->row();
+    return $this->db->get_where($this->_table,array('id_realisasi' => $id))->row();
   }
   
   function update($where, $data) //update

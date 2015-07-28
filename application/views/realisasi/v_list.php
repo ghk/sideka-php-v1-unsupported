@@ -9,7 +9,7 @@ echo $js_grid;
 var _base_url = '<?= base_url() ?>';
 
 function edit_anggaran(id) {
-  window.location = _base_url + 'apbdes/c_anggaran/edit/' + id;
+  window.location = _base_url + 'apbdes/c_realisasi/edit/' + id;
 }
 
 function btn(com,grid)
@@ -23,11 +23,11 @@ function btn(com,grid)
     {
 		$('.bDiv tbody tr',grid).removeClass('trSelected');
     }
-	
+
 	if (com=='Add')
     {
-		window.location = _base_url + 'apbdes/c_anggaran/add';
-    }	
+		window.location = _base_url + 'apbdes/c_realisasi/add';
+    }
 	if (com=='Delete Selected Items')
         {
            if($('.trSelected',grid).length>0){
@@ -39,7 +39,7 @@ function btn(com,grid)
 					}
 					$.ajax({
 					   type: "POST",
-					   url: "<?=site_url("apbdes/c_anggaran/delete/");?>",
+					   url: "<?=site_url("apbdes/c_realisasi/delete/");?>",
 					   data: "items="+itemlist,
 					   success: function(data){
 					   	$('#flex1').flexReload();
@@ -53,11 +53,11 @@ function btn(com,grid)
 			} else {
 				return false;
 			}
-        }	
+        }
 }
 
 $(function(){
-  
+
 });
 </script>
 
@@ -67,15 +67,15 @@ $(function(){
 
 <script>
 function nav_active(){
-	
+
 	document.getElementById("a-data-apbdes").className = "collapsed active";
-	
+
 	document.getElementById("apbdes").className = "collapsed";
 
-	var d = document.getElementById("nav-anggaran");
+	var d = document.getElementById("nav-realisasi");
 	d.className = d.className + "active";
 	}
- 
+
 // very simple to use!
 $(document).ready(function() {
   nav_active();

@@ -10,7 +10,7 @@ class C_realisasi extends CI_Controller {
         $this->load->helper('flexigrid_helper');
         $this->load->library('flexigrid');
         $this->load->helper('form');
-        $this->load->model('m_apbdes');
+        $this->load->model('m_realisasi');
     }
 
     function index()    {
@@ -26,9 +26,9 @@ class C_realisasi extends CI_Controller {
 
     function lists() {
         $colModel['id_realisasi'] = array('ID',20,TRUE,'center',0);	
-        $colModel['nomor_anggaran'] = array('Nomor Anggaran',20,TRUE,'center',0);	
-		$colModel['tahun_anggaran'] = array('Tahun Anggaran',220,TRUE,'left',2);
-		$colModel['deskripsi'] = array('Deskripsi',220,TRUE,'left',2);
+        $colModel['id_anggaran'] = array('Nomor Anggaran',20,TRUE,'center',0);
+		//$colModel['tahun_anggaran'] = array('Tahun Anggaran',220,TRUE,'left',2);
+		//$colModel['deskripsi'] = array('Deskripsi',220,TRUE,'left',2);
 		$colModel['tanggal'] = array('Tahun',220,TRUE,'left',2);
 		$colModel['jumlah'] = array('Perubahan?',220,TRUE,'left',2);
         $colModel['aksi'] = array('Aksi',60,FALSE,'center',0);
@@ -65,11 +65,11 @@ class C_realisasi extends CI_Controller {
 
     function load_data() {	
 		$this->load->library('flexigrid');
-        $valid_fields = array('id_realisasi', 'nomor_anggaran', 'tahun_anggaran', 'deskripsi', 'tanggal', 'jumlah', 'aksi');
+        $valid_fields = array('id_realisasi','id_anggaran','tanggal','jumlah', );
 
 		$this->flexigrid->validate_post('id_realisasi','ASC',$valid_fields);
-		$records = $this->m_apbdes->get_flexigrid();
-	
+		$records = $this->m_realisasi->get_flexigrid();
+
 		$this->output->set_header($this->config->item('json_header'));
 	
 		$record_items = array();
@@ -77,12 +77,12 @@ class C_realisasi extends CI_Controller {
 		foreach ($records['records']->result() as $row)
 		{
 			$record_items[] = array(
-				$row->id_apbdes,
-				$row->id_apbdes,
-				$row->tahun,
-				$row->is_perubahan,
-				$row->nama,
-				'<button type="submit" class="btn btn-default btn-xs" title="Edit" onclick="edit_apbdes(\''.$row->id_apbdes.'\')"/><i class="fa fa-pencil"></i></button>'
+				$row->id_realisasi,
+				$row->id_realisasi,
+				$row->id_anggaran,
+				$row->tanggal,
+				$row->jumlah,
+				'<button type="submit" class="btn btn-default btn-xs" title="Edit" onclick="edit_apbdes(\''.$row->id_realisasi.'\')"/><i class="fa fa-pencil"></i></button>'
 			);  
 		}
 		//Print please
@@ -105,23 +105,24 @@ class C_realisasi extends CI_Controller {
     }
 	
 	function simpan() {
-		$tahun = $this->input->post('tahun', TRUE);
-		$is_perubahan = $this->input->post('is_perubahan', TRUE);
-		$nama = $this->input->post('nama', TRUE);
+		$id_anggaran = $this->input->post('id_anggaran', TRUE);
+		$tanggal = $this->input->post('tanggal', TRUE);
+		$jumlah = $this->input->post('jumlah', TRUE);
 		
-		$this->form_validation->set_rules('tahun', 'Tahun', 'required');
-		$this->form_validation->set_rules('nama', 'Nama', 'required');
-
+		$this->form_validation->set_rules('id_anggaran', 'Id_Anggaran', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+		$this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
+		echo "sdasd"+ $tanggal;
 		if ($this->form_validation->run() == TRUE)
 		{
 			$data = array(
-					'tahun' => $tahun,
-					'is_perubahan' => $is_perubahan,
-					'nama' => $nama
+					'id_anggaran' => $id_anggaran,
+				'tanggal' => date('Y-m-d', strtotime($tanggal)),
+					'jumlah' => $jumlah
 				);
 	
-			$this->m_apbdes->insert($data);	
-			redirect('realisasi/c_apbdes','refresh');
+			$this->m_realisasi->insert($data);	
+			redirect('apbdes/c_realisasi','refresh');
         }
 		else $this->add();
     }
@@ -131,7 +132,7 @@ class C_realisasi extends CI_Controller {
 		$role = $session['hasil']->role;
 		if($this->session->userdata('logged_in') AND $role == 'Pengelola Data')
 		{
-			$data['hasil'] = $this->m_apbdes->getById($id);
+			$data['hasil'] = $this->m_realisasi->getById($id);
 			$data['page_title'] = 'Edit Realisasi';
 			$data['menu'] = $this->load->view('menu/v_pengelolaData', $data, TRUE);
 			$data['content'] = $this->load->view('realisasi/v_ubah', $data, TRUE);
@@ -159,7 +160,7 @@ class C_realisasi extends CI_Controller {
 					'nama' => $nama
 				);
 	
-		  	$result = $this->m_apbdes->update(array('id_apbdes' => $id), $data);
+		  	$result = $this->m_realisasi->update(array('id_apbdes' => $id), $data);
 			
 		  	redirect('apbdes/c_apbdes','refresh');
 		}
@@ -170,7 +171,7 @@ class C_realisasi extends CI_Controller {
         $post = explode(",", $this->input->post('items'));
         array_pop($post); $sucess=0;
         foreach($post as $id){
-            $this->m_apbdes->delete($id);
+            $this->m_realisasi->delete($id);
             $sucess++;
         }
 		
