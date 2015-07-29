@@ -69,7 +69,7 @@
 			</a>
 			<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
 				<li><a href="<?php echo site_url('web/c_statistik_pendapatan_dan_belanja');?>">Statistik APBDes</a></li>
-				<li><a href="<?php echo site_url('web/c_statistik_pendapatan_dan_belanja');?>">Data APBDes </a></li>
+				<li><a href="<?php echo site_url('web/c_statistik_data_apbdes');?>">Data APBDes </a></li>
 			</ul>
 		</li>
 		</li>

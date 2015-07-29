@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class M_pendapatan_dan_belanja extends CI_Model {
+class M_data_apbdes extends CI_Model {
 
 	function __construct(){
 		// Call the Model constructor
@@ -8,6 +8,13 @@ class M_pendapatan_dan_belanja extends CI_Model {
 		$this->load->library('subquery');
 	}
 
+	function getDataApbdesTable(){
+		$this->db->select('id_anggaran, nomor, id_apbdes, nama, jumlah, keterangan, id_parent, tipe_apbdes');
+		$this->db->from('tbl_anggaran');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	/**
 	function getDataPiePendapatan(){
 		$this->db->select('tbl_anggaran.nama as nama_akun, (tbl_anggaran.jumlah * 100) /(select sum(jumlah) from tbl_anggaran, tbl_apbdes where tbl_anggaran.id_apbdes = tbl_apbdes.id_apbdes and tbl_anggaran.tipe_apbdes = 0 and tbl_anggaran.id_parent = 0 ) as jumlah');
 		$this->db->from('tbl_anggaran');
@@ -73,7 +80,8 @@ class M_pendapatan_dan_belanja extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
-/**
+
+
 	function getJumlahPekerjaan(){
 		$this->db->select('id_pekerjaan,deskripsi');
 		$this->db->from('ref_pekerjaan');
