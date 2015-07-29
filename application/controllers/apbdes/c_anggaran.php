@@ -28,6 +28,7 @@ class C_anggaran extends CI_Controller {
         $colModel['id_anggaran'] = array('ID',20,TRUE,'center',0);	
 		$colModel['nomor'] = array('Nomor',50,TRUE,'left',2);
 		$colModel['id_apbdes'] = array('ID APBDes',80,TRUE,'left',2);
+		$colModel['id_parent'] = array('ID Parent',80,TRUE,'left',2);
 		$colModel['nama'] = array('Nama',220,TRUE,'left',2);
 		$colModel['jumlah'] = array('Jumlah',220,TRUE,'left',2);
 		$colModel['keterangan'] = array('Keterangan',240,TRUE,'left',2);
@@ -81,6 +82,7 @@ class C_anggaran extends CI_Controller {
 				$row->id_anggaran,
 				$row->nomor,
 				$row->id_apbdes,
+				$row->id_parent,
 				$row->nama,
 				$row->jumlah,
 				$row->keterangan,
@@ -97,6 +99,7 @@ class C_anggaran extends CI_Controller {
 		if($this->session->userdata('logged_in') AND $role == 'Pengelola Data')
 		{
 			$data['id_apbdes'] = $this->m_anggaran->get_id_apbdes();
+			$data['id_parent'] = $this->m_anggaran->get_id_parent();
 			$data['page_title'] = 'Tambah Anggaran';
 			$data['menu'] = $this->load->view('menu/v_pengelolaData', $data, TRUE);
 			$data['content'] = $this->load->view('anggaran/v_tambah', $data, TRUE);
@@ -113,7 +116,9 @@ class C_anggaran extends CI_Controller {
 		$nama = $this->input->post('nama', TRUE);
 		$jumlah = $this->input->post('jumlah', TRUE);
 		$keterangan = $this->input->post('keterangan', TRUE);
-		
+		$id_parent = $this->input->post('id_parent', TRUE);
+		$tipe_apbdes = $this->input->post('tipe_apbdes', TRUE);
+
 		$this->form_validation->set_rules('nomor', 'Nomor', 'required');
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$this->form_validation->set_rules('id_apbdes', 'APBDes', 'required');
@@ -125,7 +130,9 @@ class C_anggaran extends CI_Controller {
 					'id_apbdes' => $id_apbdes,
 					'nama' => $nama,
 					'jumlah' => $jumlah,
-					'keterangan' => $keterangan
+					'keterangan' => $keterangan,
+				    'id_parent' => $id_parent,
+				    'tipe_apbdes' => $tipe_apbdes
 				);
 	
 			$this->m_anggaran->insert($data);	
@@ -140,6 +147,7 @@ class C_anggaran extends CI_Controller {
 		if($this->session->userdata('logged_in') AND $role == 'Pengelola Data')
 		{
 			$data['id_apbdes'] = $this->m_anggaran->get_id_apbdes();
+			$data['id_parent'] = $this->m_anggaran->get_id_parent();
 			$data['hasil'] = $this->m_anggaran->getById($id);
 			$data['page_title'] = 'Edit Anggaran';
 			$data['menu'] = $this->load->view('menu/v_pengelolaData', $data, TRUE);
@@ -158,7 +166,9 @@ class C_anggaran extends CI_Controller {
 		$nama = $this->input->post('nama', TRUE);
 		$jumlah = $this->input->post('jumlah', TRUE);
 		$keterangan = $this->input->post('keterangan', TRUE);
-		
+		$id_parent = $this->input->post('id_parent', TRUE);
+		$tipe_apbdes = $this->input->post('tipe_apbdes', TRUE);
+
 		$this->form_validation->set_rules('nomor', 'Nomor', 'required');
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$this->form_validation->set_rules('id_apbdes', 'APBDes', 'required');
@@ -170,7 +180,9 @@ class C_anggaran extends CI_Controller {
 					'id_apbdes' => $id_apbdes,
 					'nama' => $nama,
 					'jumlah' => $jumlah,
-					'keterangan' => $keterangan
+					'keterangan' => $keterangan,
+				    'id_parent' => $id_parent,
+				    'tipe_apbdes' => $tipe_apbdes
 				);
 	
 		  	$result = $this->m_anggaran->update(array('id_anggaran' => $id), $data);

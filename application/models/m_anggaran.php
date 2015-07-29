@@ -68,5 +68,19 @@ class M_anggaran extends CI_Model {
         }
         return ($data);
     }
+
+    function get_id_parent()
+    {
+        $this->db->where('id_parent >=','0');
+        $records = $this->db->get('tbl_anggaran');
+
+        $data=array();
+        foreach ($records->result() as $row)
+        {
+            $data[''] = '--Pilih--';
+            $data[$row->id_anggaran] = $row->nama;
+        }
+        return ($data);
+    }
 }
 ?>

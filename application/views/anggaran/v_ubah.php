@@ -4,7 +4,6 @@
 	echo ! empty($flashmessage) ? '<p class="message">' . $flashmessage . '</p>': ''; ?>
 
 <?php echo form_open('apbdes/c_anggaran/update'); ?>
-
 <fieldset>
 	<legend></legend>
     <input  value="<?= $hasil->id_anggaran?>" id="id_anggaran" name="id_anggaran" type="hidden" class="form-control input-md">
@@ -18,6 +17,41 @@
 		</div>
 	</div>
 
+	<div class="form-group">
+		<label class="col-md-3 control-label" for="id_parent">Id Parent</label>
+		<div class="col-md-9">
+        <span class="help-block"><?php $id = 'id="id_parent" class="form-control input-md" required';
+			echo form_dropdown('id_parent',$id_parent,$hasil->id_parent,$id)?>
+		</span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-3 control-label" for="tipe_apbdes">Tipe APBDes </label>
+		<div class="col-md-9">
+			  <span class="help-block">
+			 <select type="text" class="form-control input-md" name="tipe_apbdes" id="tipe_apbdes">
+				 <?php
+				 if($hasil->tipe_apbdes == 0){
+				 ?>
+				 <option value="<?= $hasil->tipe_apbdes?>">Pendapatan</option>
+				 <option value="1">Belanja</option>
+				 <?php
+				 } else{
+				 ?>
+				 <option value="<?= $hasil->tipe_apbdes?>">Belanja</option>
+				 <option value="0">Pendapatan</option>
+				 <?php
+					 }
+				 ?>
+
+
+			 </select>
+			</span>
+			<?php echo form_error('tipe_apbdes', '<p class="field_error">','</p>')?>
+
+		</div>
+	</div>
 	<div class="form-group">
 		<label  class="col-md-3 control-label" for="tahun">Nomor</label>
 		<div class="col-md-9">
