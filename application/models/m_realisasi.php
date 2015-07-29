@@ -54,6 +54,21 @@ class M_realisasi extends CI_Model {
     $this->db->update($this->_table, $data);
     return $this->db->affected_rows();
   }
+
+    function get_id_anggaran()
+    {
+        $this->db->where('id_anggaran !=','0');
+        $records = $this->db->get('tbl_anggaran');
+
+        $data=array();
+        foreach ($records->result() as $row)
+        {
+            $data[''] = '--Pilih--';
+            $data[$row->id_anggaran] = $row->nama;
+        }
+        return ($data);
+    }
+
   
 }
 ?>

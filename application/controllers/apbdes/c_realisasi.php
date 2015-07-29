@@ -93,7 +93,8 @@ class C_realisasi extends CI_Controller {
 		$session['hasil'] = $this->session->userdata('logged_in');
 		$role = $session['hasil']->role;
 		if($this->session->userdata('logged_in') AND $role == 'Pengelola Data')
-		{			
+		{
+			$data['id_anggaran'] = $this->m_realisasi->get_id_anggaran();
 			$data['page_title'] = 'Tambah Realisasi';
 			$data['menu'] = $this->load->view('menu/v_pengelolaData', $data, TRUE);
 			$data['content'] = $this->load->view('realisasi/v_tambah', $data, TRUE);
@@ -133,6 +134,7 @@ class C_realisasi extends CI_Controller {
 		$role = $session['hasil']->role;
 		if($this->session->userdata('logged_in') AND $role == 'Pengelola Data')
 		{
+			$data['id_anggaran'] = $this->m_realisasi->get_id_anggaran();
 			$data['hasil'] = $this->m_realisasi->getById($id);
 			$data['page_title'] = 'Edit Realisasi';
 			$data['menu'] = $this->load->view('menu/v_pengelolaData', $data, TRUE);

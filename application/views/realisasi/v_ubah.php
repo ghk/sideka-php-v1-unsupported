@@ -8,16 +8,18 @@
 <fieldset>
 	<legend></legend>
     <input  value="<?= $hasil->id_anggaran?>" id="id_realisasi" name="id_realisasi" type="hidden" class="form-control input-md">
-	<div class="form-group">
-		<label  class="col-md-3 control-label" for="id_anggaran">Id Anggaran</label>
-		<div class="col-md-9">
-			<input  value="<?= $hasil->id_realisasi?>"  id="id_anggaran" name="id_anggaran" type="number" placeholder="Id Anggaran" class="form-control input-md">
-			<span class="help-block"><?php echo form_error('id_anggaran', '<p class="field_error">','</p>')?></span>
-		</div>
-	</div>
 
 	<div class="form-group">
-		<label class="col-md-3 control-label" for="tgl_timbang">Tanggal</label>
+		<label class="col-md-3 control-label" for="id_anggaran">Anggaran</label>
+		<div class="col-md-9">
+        <span class="help-block"><?php $id = 'id="id_anggaran" class="form-control input-md" required';
+			echo form_dropdown('id_anggaran',$id_anggaran,$hasil->id_anggaran,$id)?>
+		</span>
+		</div>
+	</div>na
+
+	<div class="form-group">
+		<label class="col-md-3 control-label" for="tanggal">Tanggal</label>
 		<div class="col-md-9">
 			<a href="javascript:NewCssCal('tanggal','ddmmyyyy')">
 				<div class="input-group">

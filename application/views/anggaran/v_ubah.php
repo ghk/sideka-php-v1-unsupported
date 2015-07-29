@@ -8,13 +8,16 @@
 <fieldset>
 	<legend></legend>
     <input  value="<?= $hasil->id_anggaran?>" id="id_anggaran" name="id_anggaran" type="hidden" class="form-control input-md">
+
 	<div class="form-group">
-		<label  class="col-md-3 control-label" for="id_apbdes">APBDes</label>
+		<label class="col-md-3 control-label" for="id_apbdes">APBDes</label>
 		<div class="col-md-9">
-			<input  value="<?= $hasil->id_apbdes?>"  id="id_apbdes" name="id_apbdes" type="number" placeholder="ID APBdes" class="form-control input-md">
-			<span class="help-block"><?php echo form_error('id_apbdes', '<p class="field_error">','</p>')?></span>  
+        <span class="help-block"><?php $id = 'id="id_apbdes" class="form-control input-md" required';
+			echo form_dropdown('id_apbdes',$id_apbdes,$hasil->id_apbdes,$id)?>
+		</span>
 		</div>
 	</div>
+
 	<div class="form-group">
 		<label  class="col-md-3 control-label" for="tahun">Nomor</label>
 		<div class="col-md-9">

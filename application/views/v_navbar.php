@@ -61,9 +61,17 @@
 				<li><a href="<?php echo site_url('web/c_statistik_buruh_migran');?>">Buruh Migran</a></li>
 				<li><a href="<?php echo site_url('web/c_statistik_bsm');?>">Bantuan Siswa Miskin</a></li>						
 				<li><a href="<?php echo site_url('web/c_statistik_piramida');?>">Piramida Penduduk</a></li>
-				<li><a href="<?php echo site_url('web/c_statistik_pendapatan_dan_belanja');?>">Pendapatan dan Belanja Desa</a></li>
 			</ul>
 			<li id="nav-regulasi"><a href="<?php echo site_url('web/c_regulasi/');?>">Regulasi</a></li>
+		<li id="nav-lembaga" class="dropdown">
+			<a class="dropdown-toggle dropdownhover" data-toggle="dropdown" href="#">
+				APBDes <span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+				<li><a href="<?php echo site_url('web/c_statistik_pendapatan_dan_belanja');?>">Statistik APBDes</a></li>
+				<li><a href="<?php echo site_url('web/c_statistik_pendapatan_dan_belanja');?>">Data APBDes </a></li>
+			</ul>
+		</li>
 		</li>
 	
 	</ul>

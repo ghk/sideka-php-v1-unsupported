@@ -9,10 +9,11 @@
 
 	<!-- Text input-->
 	<div class="form-group">
-		<label  class="col-md-3 control-label" for="id_anggaran">Id Anggaran</label>
+		<label class="col-md-3 control-label" for="id_anggaran">Anggaran</label>
 		<div class="col-md-9">
-			<input   id="id_anggaran" name="id_anggaran" type="number" placeholder="Id Anggaran" class="form-control input-md">
-			<span class="help-block"><?php echo form_error('id_anggaran', '<p class="field_error">','</p>')?></span>
+        <span class="help-block"><?php $id = 'id="id_anggaran" class="form-control input-md" required';
+			echo form_dropdown('id_anggaran',$id_anggaran,'',$id)?>
+		</span>
 		</div>
 	</div>
 

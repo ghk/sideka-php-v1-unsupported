@@ -54,6 +54,19 @@ class M_anggaran extends CI_Model {
     $this->db->update($this->_table, $data);
     return $this->db->affected_rows();
   }
-  
+
+    function get_id_apbdes()
+    {
+        $this->db->where('id_apbdes !=','0');
+        $records = $this->db->get('tbl_apbdes');
+
+        $data=array();
+        foreach ($records->result() as $row)
+        {
+            $data[''] = '--Pilih--';
+            $data[$row->id_apbdes] = $row->nama;
+        }
+        return ($data);
+    }
 }
 ?>

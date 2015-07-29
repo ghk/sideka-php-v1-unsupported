@@ -95,7 +95,8 @@ class C_anggaran extends CI_Controller {
 		$session['hasil'] = $this->session->userdata('logged_in');
 		$role = $session['hasil']->role;
 		if($this->session->userdata('logged_in') AND $role == 'Pengelola Data')
-		{			
+		{
+			$data['id_apbdes'] = $this->m_anggaran->get_id_apbdes();
 			$data['page_title'] = 'Tambah Anggaran';
 			$data['menu'] = $this->load->view('menu/v_pengelolaData', $data, TRUE);
 			$data['content'] = $this->load->view('anggaran/v_tambah', $data, TRUE);
@@ -138,6 +139,7 @@ class C_anggaran extends CI_Controller {
 		$role = $session['hasil']->role;
 		if($this->session->userdata('logged_in') AND $role == 'Pengelola Data')
 		{
+			$data['id_apbdes'] = $this->m_anggaran->get_id_apbdes();
 			$data['hasil'] = $this->m_anggaran->getById($id);
 			$data['page_title'] = 'Edit Anggaran';
 			$data['menu'] = $this->load->view('menu/v_pengelolaData', $data, TRUE);
