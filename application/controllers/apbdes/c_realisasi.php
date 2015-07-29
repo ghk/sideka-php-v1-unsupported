@@ -116,9 +116,9 @@ class C_realisasi extends CI_Controller {
 		if ($this->form_validation->run() == TRUE)
 		{
 			$data = array(
-					'id_anggaran' => $id_anggaran,
+				'id_anggaran' => $id_anggaran,
 				'tanggal' => date('Y-m-d', strtotime($tanggal)),
-					'jumlah' => $jumlah
+				'jumlah' => $jumlah
 				);
 	
 			$this->m_realisasi->insert($data);	
@@ -144,26 +144,26 @@ class C_realisasi extends CI_Controller {
     }
 	
 	function update() {
-		echo "asdasdasd";
-		$id = $this->input->post('id_apbdes', TRUE);
-		$tahun = $this->input->post('tahun', TRUE);
-		$is_perubahan = $this->input->post('is_perubahan', TRUE);
-		$nama = $this->input->post('nama', TRUE);
-		
-		$this->form_validation->set_rules('tahun', 'Tahun', 'required');
-		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		$id = $this->input->post('id_realisasi', TRUE);
+		$id_anggaran = $this->input->post('id_anggaran', TRUE);
+		$tanggal = $this->input->post('tanggal', TRUE);
+		$jumlah = $this->input->post('jumlah', TRUE);
+
+		$this->form_validation->set_rules('id_anggaran', 'Id_Anggaran', 'required');
+		$this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+		$this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
 
 		if ($this->form_validation->run() == TRUE)
 		{
 			$data = array(
-					'tahun' => $tahun,
-					'is_perubahan' => $is_perubahan,
-					'nama' => $nama
+				'id_anggaran' => $id_anggaran,
+				'tanggal' => date('Y-m-d', strtotime($tanggal)),
+				'jumlah' => $jumlah
 				);
 	
-		  	$result = $this->m_realisasi->update(array('id_apbdes' => $id), $data);
+		  	$result = $this->m_realisasi->update(array('id_realisasi' => $id), $data);
 			
-		  	redirect('apbdes/c_apbdes','refresh');
+		  	redirect('apbdes/c_realisasi','refresh');
 		}
 		else $this->edit($id);
     }
@@ -176,7 +176,7 @@ class C_realisasi extends CI_Controller {
             $sucess++;
         }
 		
-        redirect('apbdes/c_apbdes', 'refresh');
+        redirect('apbdes/c_realisasi', 'refresh');
     }
 	
 

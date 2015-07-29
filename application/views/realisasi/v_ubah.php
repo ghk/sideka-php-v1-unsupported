@@ -3,7 +3,7 @@
 <?php $flashmessage = $this->session->flashdata('exist');
 	echo ! empty($flashmessage) ? '<p class="message">' . $flashmessage . '</p>': ''; ?>
 
-<?php echo form_open('apbdes/c_anggaran/update'); ?>
+<?php echo form_open('apbdes/c_realisasi/update'); ?>
 
 <fieldset>
 	<legend></legend>
@@ -50,7 +50,7 @@ function nav_active(){
 	
 	document.getElementById("apbdes").className = "collapsed";
 
-	var d = document.getElementById("nav-anggaran");
+	var d = document.getElementById("nav-realisasi");
 	d.className = d.className + "active";
 	}
  
