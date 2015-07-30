@@ -135,7 +135,8 @@ class C_anggaran extends CI_Controller {
 				    'tipe_apbdes' => $tipe_apbdes
 				);
 	
-			$this->m_anggaran->insert($data);	
+			$this->m_anggaran->insert($data);
+			$this->recalculate_parent($id_parent);
 			redirect('apbdes/c_anggaran','refresh');
         }
 		else $this->add();
@@ -160,7 +161,6 @@ class C_anggaran extends CI_Controller {
 	
 	function update() {	
 		$id = $this->input->post('id_anggaran', TRUE);
-
 		$nomor = $this->input->post('nomor', TRUE);
 		$id_apbdes = $this->input->post('id_apbdes', TRUE);
 		$nama = $this->input->post('nama', TRUE);
@@ -186,7 +186,7 @@ class C_anggaran extends CI_Controller {
 				);
 	
 		  	$result = $this->m_anggaran->update(array('id_anggaran' => $id), $data);
-			
+			$this->recalculate_parent($id_parent);
 		  	redirect('apbdes/c_anggaran','refresh');
 		}
 		else $this->edit($id);
@@ -196,12 +196,28 @@ class C_anggaran extends CI_Controller {
         $post = explode(",", $this->input->post('items'));
         array_pop($post); $sucess=0;
         foreach($post as $id){
+			$data = $this->m_anggaran->getById($id);
+			$id_parent = $data->id_parent;
             $this->m_anggaran->delete($id);
+			$this->recalculate_parent($id_parent);
             $sucess++;
         }
 		
         redirect('apbdes/c_anggaran', 'refresh');
     }
+
+	function recalculate_parent($id){
+
+		$sum_jumlah = $this->m_anggaran->get_id_for_recalculate($id);
+		$data = $this->m_anggaran->getById($id);
+		$data->jumlah = $sum_jumlah;
+		$next_id_parent = $data->id_parent;
+		$this->m_anggaran->update(array('id_anggaran' => $id), $data);
+		if ($next_id_parent > 0){
+			$this->recalculate_parent($next_id_parent);
+		}
+
+	}
 	
 
 

@@ -82,5 +82,19 @@ class M_anggaran extends CI_Model {
         }
         return ($data);
     }
+
+    function get_id_for_recalculate($anggaran)
+    {
+        $jumlah = 0;
+        $this->db->where('id_parent =',$anggaran);
+        $records = $this->db->get('tbl_anggaran');
+
+        $data=array();
+        foreach ($records->result() as $row)
+        {
+            $jumlah = $jumlah + $row->jumlah;
+        }
+        return ($jumlah);
+    }
 }
 ?>
