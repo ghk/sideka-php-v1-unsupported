@@ -37,10 +37,16 @@ class C_statistik_pendapatan_dan_belanja extends CI_Controller {
 		$jsonstackbelanjarealisasi =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackbelanjarealisasi);
 		$data['jsonstackbelanjarealisasi'] = $jsonstackbelanjarealisasi;
 		//stackchart belanja belum di realisasi
-		$belanjastackbelumrealisasi[] = $this->m_pendapatan_dan_belanja->getDataStackBelanjaBelumRealisasi();
+		$belanjastackbelumrealisasi[] =  $this->m_pendapatan_dan_belanja->getDataStackBelanjaBelumRealisasi();
 		$jsonstackbelanjabelumrealisasi = json_encode($belanjastackbelumrealisasi);
 		$jsonstackbelanjabelumrealisasi =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackbelanjabelumrealisasi);
 		$data['jsonstackbelanjabelumrealisasi'] = $jsonstackbelanjabelumrealisasi;
+		//Container Basic Pendapatan per bulan
+		$pendapatanbasic[] = $this->m_pendapatan_dan_belanja->getDataPendapatanBasic();
+		//echo "asdsda"+$pendapatanbasic[jumlah];
+		$jsonstackpendapatanbasic = json_encode($pendapatanbasic);
+		$jsonstackpendapatanbasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackpendapatanbasic);
+		$data['jsonstackpendapatanbasic'] = $jsonstackpendapatanbasic;
 
 		//$data['result'] = $this->m_pendapatan_dan_belanja->getDataAkunPendapatan();
 		//$data['jumlah'] = $this->m_pendapatan_dan_belanja->getJumlahPekerjaan();

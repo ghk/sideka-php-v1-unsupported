@@ -64,6 +64,22 @@ class M_pendapatan_dan_belanja extends CI_Model {
 		return $query->result();
 	}
 
+	function getDataPendapatanBasic(){
+		$query = $this->db->query('
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 01 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 02 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 03 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 04 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 05 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 06 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 07 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 08 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 09 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 10 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 11 union all
+		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 12');
+		return $query->result();
+	}
 
 	function getDataAkunTable(){
 		$this->db->select('tbl_anggaran.nama as nama_akun, tbl_anggaran.jumlah as jumlah');
