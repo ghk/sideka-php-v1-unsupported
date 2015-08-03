@@ -64,20 +64,41 @@ class M_pendapatan_dan_belanja extends CI_Model {
 		return $query->result();
 	}
 
-	function getDataPendapatanBasic(){
-		$query = $this->db->query('
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 01 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 02 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 03 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 04 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 05 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 06 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 07 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 08 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 09 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 10 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 11 union all
-		select "nama" as nama_akun, ifnull(sum(jumlah),0) as jumlah from tbl_realisasi where DATE_FORMAT(tanggal,"%m") = 12');
+	function getDataPendapatanBasic($tipeapbdes){
+		$sql = '
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 01 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 02 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 03 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 04 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 05 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 06 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 07 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 08 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 09 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 10 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 11 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 0 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 12
+		';
+		$query = $this->db->query($sql,array($tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes));
+	return $query->result();
+	}
+
+	function getDataBelanjaBasic($tipeapbdes){
+		$sql = '
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 01 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 02 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 03 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 04 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 05 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 06 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 07 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 08 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 09 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 10 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 11 union all
+		select "nama" as nama_akun, sum(tr.jumlah) as jumlah from tbl_realisasi tr, tbl_anggaran ta, tbl_apbdes tp where tr.id_anggaran = ta.id_anggaran and ta.id_apbdes = tp.id_apbdes and tp.tahun = 2015 and ta.tipe_apbdes = 1 and tr.id_anggaran = ? and DATE_FORMAT(tr.tanggal,"%m") = 12
+		';
+		$query = $this->db->query($sql,array($tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes,$tipeapbdes));
 		return $query->result();
 	}
 

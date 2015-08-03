@@ -41,12 +41,54 @@ class C_statistik_pendapatan_dan_belanja extends CI_Controller {
 		$jsonstackbelanjabelumrealisasi = json_encode($belanjastackbelumrealisasi);
 		$jsonstackbelanjabelumrealisasi =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackbelanjabelumrealisasi);
 		$data['jsonstackbelanjabelumrealisasi'] = $jsonstackbelanjabelumrealisasi;
-		//Container Basic Pendapatan per bulan
-		$pendapatanbasic[] = $this->m_pendapatan_dan_belanja->getDataPendapatanBasic();
-		//echo "asdsda"+$pendapatanbasic[jumlah];
-		$jsonstackpendapatanbasic = json_encode($pendapatanbasic);
-		$jsonstackpendapatanbasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackpendapatanbasic);
-		$data['jsonstackpendapatanbasic'] = $jsonstackpendapatanbasic;
+		$pendapatanaslidesa = 1;
+		$pendapatantransfer = 2;
+		$pendapatanlainlain = 3;
+		//Container Basic Pendapatan Asli Desa per bulan
+		$pendapatanaslibasic[] = $this->m_pendapatan_dan_belanja->getDataPendapatanBasic($pendapatanaslidesa);
+		$jsonstackpendapatanaslibasic = json_encode($pendapatanaslibasic);
+		$jsonstackpendapatanaslibasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackpendapatanaslibasic);
+		$data['jsonstackpendapatanaslibasic'] = $jsonstackpendapatanaslibasic;
+		//Container Basic Pendapatan Transfer Desa per bulan
+		$pendapatantransferbasic[] = $this->m_pendapatan_dan_belanja->getDataPendapatanBasic($pendapatantransfer);
+		$jsonstackpendapatantransferbasic = json_encode($pendapatantransferbasic);
+		$jsonstackpendapatantransferbasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackpendapatantransferbasic);
+		$data['jsonstackpendapatantransferbasic'] = $jsonstackpendapatantransferbasic;
+		//Container Basic Pendapatan Lain-lain Desa per bulan
+		$pendapatanlainbasic[] = $this->m_pendapatan_dan_belanja->getDataPendapatanBasic($pendapatanlainlain);
+		$jsonstackpendapatanlainbasic = json_encode($pendapatanlainbasic);
+		$jsonstackpendapatanlainbasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackpendapatanlainbasic);
+		$data['jsonstackpendapatanlainbasic'] = $jsonstackpendapatanlainbasic;
+		$penyelenggaraan = 4;
+		$pelaksanaan     = 5;
+		$pembinaan       = 6;
+		$pemberdayaan    = 7;
+		$takterduga      = 8;
+		//Container Basic Belanja Penyelenggaraan per bulan
+		$belanjapenyelenggaraanbasic[] = $this->m_pendapatan_dan_belanja->getDataBelanjaBasic($penyelenggaraan);
+		$jsonstackbelanjapenyelenggaraanbasic = json_encode($belanjapenyelenggaraanbasic);
+		$jsonstackbelanjapenyelenggaraanbasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackbelanjapenyelenggaraanbasic);
+		$data['jsonstackbelanjapenyelenggaraanbasic'] = $jsonstackbelanjapenyelenggaraanbasic;
+		//Container Basic Belanja Pelaksanaan per bulan
+		$belanjapelaksanaanbasic[] = $this->m_pendapatan_dan_belanja->getDataBelanjaBasic($pelaksanaan);
+		$jsonstackbelanjapelaksanaanbasic = json_encode($belanjapelaksanaanbasic);
+		$jsonstackbelanjapelaksanaanbasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackbelanjapelaksanaanbasic);
+		$data['jsonstackbelanjapelaksanaanbasic'] = $jsonstackbelanjapelaksanaanbasic;
+		//Container Basic Belanja Pembinaan per bulan
+		$belanjapembinaanbasic[] = $this->m_pendapatan_dan_belanja->getDataBelanjaBasic($pembinaan);
+		$jsonstackbelanjapembinaanbasic = json_encode($belanjapembinaanbasic);
+		$jsonstackbelanjapembinaanbasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackbelanjapembinaanbasic);
+		$data['jsonstackbelanjapembinaanbasic'] = $jsonstackbelanjapembinaanbasic;
+		//Container Basic Belanja Pemberdayaan per bulan
+		$belanjapemberdayaanbasic[] = $this->m_pendapatan_dan_belanja->getDataBelanjaBasic($pemberdayaan);
+		$jsonstackbelanjapemberdayaanbasic = json_encode($belanjapemberdayaanbasic);
+		$jsonstackbelanjapemberdayaanbasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackbelanjapemberdayaanbasic);
+		$data['jsonstackbelanjapemberdayaanbasic'] = $jsonstackbelanjapemberdayaanbasic;
+		//Container Basic Belanja Tak Terduga per bulan
+		$belanjatakterdugabasic[] = $this->m_pendapatan_dan_belanja->getDataBelanjaBasic($takterduga);
+		$jsonstackbelanjatakterdugabasic = json_encode($belanjatakterdugabasic);
+		$jsonstackbelanjatakterdugabasic =	$this->m_pendapatan_dan_belanja->highchartJson($jsonstackbelanjatakterdugabasic);
+		$data['jsonstackbelanjatakterdugabasic'] = $jsonstackbelanjatakterdugabasic;
 
 		//$data['result'] = $this->m_pendapatan_dan_belanja->getDataAkunPendapatan();
 		//$data['jumlah'] = $this->m_pendapatan_dan_belanja->getJumlahPekerjaan();
