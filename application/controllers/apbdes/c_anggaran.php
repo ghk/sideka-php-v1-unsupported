@@ -26,11 +26,11 @@ class C_anggaran extends CI_Controller {
 
     function lists() {
         $colModel['id_anggaran'] = array('ID',20,TRUE,'center',0);	
-		$colModel['nomor'] = array('Nomor',50,TRUE,'left',2);
+		$colModel['nomor'] = array('Kode',50,TRUE,'left',2);
 		$colModel['id_apbdes'] = array('ID APBDes',80,TRUE,'left',2);
-		$colModel['id_parent'] = array('ID Parent',80,TRUE,'left',2);
+		$colModel['id_parent'] = array('ID Kepala',80,TRUE,'left',2);
 		$colModel['nama'] = array('Nama',220,TRUE,'left',2);
-		$colModel['jumlah'] = array('Jumlah',220,TRUE,'left',2);
+		$colModel['jumlah'] = array('Jumlah',150,TRUE,'left',2);
 		$colModel['keterangan'] = array('Keterangan',240,TRUE,'left',2);
         $colModel['aksi'] = array('Aksi',60,FALSE,'center',0);
 		

@@ -197,7 +197,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Pendapatan Desa 2015'
+                text: 'Realisasi Pendapatan Desa'
             },
             xAxis: {
                 categories: ['Pendapatan Asli Desa', 'Pendapatan Transfer', 'Pendapatan Lain lain']
@@ -263,7 +263,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Belanja Desa 2015'
+                text: 'Realisasi Belanja Desa'
             },
             xAxis: {
                 categories: ['Bidang Penyelenggaraan Pemerintahan     Desa', 'Bidang Pelaksanaan Pembangunan Desa', 'Bidang Pembinaan Kemasyarakatan', 'Bidang Pemberdayaan Masyarakat', 'Bidang Tak Terduga']
@@ -329,7 +329,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Pendapatan Desa Per Bulan'
+                text: 'Realisasi Pendapatan Desa Per Bulan'
             },
             subtitle: {
                 text: 'Pendapatan'
@@ -394,7 +394,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Belanja Desa Per Bulan'
+                text: 'Realisasi Belanja Desa Per Bulan'
             },
             subtitle: {
                 text: 'Belanja'

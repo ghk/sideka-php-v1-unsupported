@@ -14,6 +14,24 @@ class M_data_apbdes extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	function getPendapatanApbdesTable(){
+		$this->db->select('id_anggaran, nomor, id_apbdes, nama, jumlah, keterangan, id_parent, tipe_apbdes');
+		$this->db->from('tbl_anggaran');
+		$this->db->where('tbl_anggaran.tipe_apbdes = 0');
+		$this->db->order_by('tbl_anggaran.nomor');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getBelanjaApbdesTable(){
+		$this->db->select('id_anggaran, nomor, id_apbdes, nama, jumlah, keterangan, id_parent, tipe_apbdes');
+		$this->db->from('tbl_anggaran');
+		$this->db->where('tbl_anggaran.tipe_apbdes = 1');
+		$this->db->order_by('tbl_anggaran.nomor');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	/**
 	function getDataPiePendapatan(){
 		$this->db->select('tbl_anggaran.nama as nama_akun, (tbl_anggaran.jumlah * 100) /(select sum(jumlah) from tbl_anggaran, tbl_apbdes where tbl_anggaran.id_apbdes = tbl_apbdes.id_apbdes and tbl_anggaran.tipe_apbdes = 0 and tbl_anggaran.id_parent = 0 ) as jumlah');

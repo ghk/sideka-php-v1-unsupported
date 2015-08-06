@@ -68,8 +68,9 @@
 				APBDes <span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-				<li><a href="<?php echo site_url('web/c_statistik_pendapatan_dan_belanja');?>">Statistik APBDes</a></li>
-				<li><a href="<?php echo site_url('web/c_statistik_data_apbdes');?>">Data APBDes </a></li>
+				<li><a href="<?php echo site_url('web/c_statistik_data_apbdes/pendapatan');?>">Anggaran Pendapatan</a></li>
+				<li><a href="<?php echo site_url('web/c_statistik_data_apbdes/belanja');?>">Anggaran Belanja</a></li>
+				<li><a href="<?php echo site_url('web/c_statistik_pendapatan_dan_belanja');?>">Statistik</a></li>
 			</ul>
 		</li>
 		</li>

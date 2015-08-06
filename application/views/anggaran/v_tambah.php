@@ -20,16 +20,7 @@
 	</div>
 
 	<div class="form-group">
-		<label class="col-md-3 control-label" for="id_parent">Id Parent</label>
-		<div class="col-md-9">
-        <span class="help-block"><?php $id = 'id="id_parent" class="form-control input-md" required';
-			echo form_dropdown('id_parent',$id_parent,'',$id)?>
-		</span>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-md-3 control-label" for="tipe_apbdes">Tipe APBDes </label>
+		<label class="col-md-3 control-label" for="tipe_apbdes">Tipe Anggaran </label>
 		<div class="col-md-9">
 			  <span class="help-block">
 			 <select type="text" class="form-control input-md" name="tipe_apbdes" id="tipe_apbdes">
@@ -42,8 +33,18 @@
 		</div>
 	</div>
 
+
 	<div class="form-group">
-		<label  class="col-md-3 control-label" for="tahun">Nomor</label>
+		<label class="col-md-3 control-label" for="id_parent">Kepala Anggaran</label>
+		<div class="col-md-9">
+        <span class="help-block"><?php $id = 'id="id_parent" class="form-control input-md" required';
+			echo form_dropdown('id_parent',$id_parent,'',$id)?>
+		</span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label  class="col-md-3 control-label" for="tahun">Kode</label>
 		<div class="col-md-9">
 			<input   id="nomor" name="nomor" type="text" placeholder="Nomor" class="form-control input-md">
 			<span class="help-block"><?php echo form_error('nomor', '<p class="field_error">','</p>')?></span>  
