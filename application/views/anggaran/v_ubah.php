@@ -84,7 +84,7 @@
 </fieldset>
 <p>
 <input type="submit" value="Simpan" id="simpan"class="btn btn-success"/>
-<input type="button" value="Batal" id="batal" class="btn btn-danger"onclick="location.href='<?= base_url() ?>apbdes/c_apbdes'"/>
+<input type="button" value="Batal" id="batal" class="btn btn-danger"onclick="location.href='<?= base_url() ?>apbdes/c_anggaran'"/>
 </p>
 <script>
 function nav_active(){
