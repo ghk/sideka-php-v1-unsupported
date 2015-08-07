@@ -47,7 +47,7 @@
 	<div class="form-group">
 		<label class="col-md-3 control-label" for="id_parent">Kepala Anggaran</label>
 		<div class="col-md-9">
-        <span class="help-block"><?php $id = 'id="id_parent" class="form-control input-md" required';
+        <span class="help-block"><?php $id = 'id="id_parent" class="form-control input-md"';
 			echo form_dropdown('id_parent',$id_parent,$hasil->id_parent,$id)?>
 		</span>
 		</div>

@@ -159,7 +159,7 @@ class C_anggaran extends CI_Controller {
 			redirect('c_login', 'refresh');
     }
 	
-	function update() {	
+	function update() {
 		$id = $this->input->post('id_anggaran', TRUE);
 		$nomor = $this->input->post('nomor', TRUE);
 		$id_apbdes = $this->input->post('id_apbdes', TRUE);
@@ -168,7 +168,6 @@ class C_anggaran extends CI_Controller {
 		$keterangan = $this->input->post('keterangan', TRUE);
 		$id_parent = $this->input->post('id_parent', TRUE);
 		$tipe_apbdes = $this->input->post('tipe_apbdes', TRUE);
-
 		$this->form_validation->set_rules('nomor', 'Nomor', 'required');
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$this->form_validation->set_rules('id_apbdes', 'APBDes', 'required');
@@ -186,7 +185,9 @@ class C_anggaran extends CI_Controller {
 				);
 	
 		  	$result = $this->m_anggaran->update(array('id_anggaran' => $id), $data);
+			if ($id_parent != null){
 			$this->recalculate_parent($id_parent);
+			}
 		  	redirect('apbdes/c_anggaran','refresh');
 		}
 		else $this->edit($id);
