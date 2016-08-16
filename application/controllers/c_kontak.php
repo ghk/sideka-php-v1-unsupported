@@ -117,13 +117,15 @@ class C_kontak extends CI_Controller {
 		
 		$realPerson = $this->input->post('aunt', TRUE);		
 		$realPersonHash = $this->input->post('auntHash', TRUE);		
-		
+		$bitphp = $this->maxBit();
+		if ($bitphp == 32) { $checkhash = $this->rpHash($realPerson); }
+		else $checkhash = $this->rpHash64($realPerson);
 		$this->form_validation->set_rules('nama', 'Nama', 'required');				
 		$this->form_validation->set_rules('pesan', 'Pesan', 'required');
 		
 		if ($this->form_validation->run() == TRUE)
 		{		
-			if ($this->rpHash($realPerson) == $realPersonHash) {
+			if ($checkhash == $realPersonHash) {
 				$email2=$this->cekNull($email);
 				$data = array(
 					'nama' => $nama,
@@ -177,12 +179,11 @@ class C_kontak extends CI_Controller {
 	}  
 	
 	/*******PHP 64 BIT/*******/
-	/*
-	function rpHash($value) { 
+	function rpHash64($value) { 
     $hash = 5381; 
     $value = strtoupper($value); 
     for($i = 0; $i < strlen($value); $i++) { 
-        $hash = (leftShift32($hash, 5) + $hash) + ord(substr($value, $i)); 
+        $hash = ($this->leftShift32($hash, 5) + $hash) + ord(substr($value, $i)); 
     } 
     return $hash; 
 	} 
@@ -201,7 +202,26 @@ class C_kontak extends CI_Controller {
 		// otherwise return the 2's complement 
 		return ($binary{0} == "0" ? bindec($binary) : 
 			-(pow(2, 31) - bindec(substr($binary, 1)))); 
-	} */
+	}
 	/*******END OF PHP 64 BIT/*******/
+	function maxBit()  {
+      list($return, $number) = array(0, 0);
+
+      // Start process
+      while (true) {
+          // Get number at x bits
+          $numX = intval(bcsub(bcpow('2', "{$return}"), '1'));
+          // Check number
+          if ($numX != 0 && $number == $numX) {
+              break;
+          }
+          // Update number
+          $number = $numX;
+          // Update return value
+          $return++;
+      }
+
+      return $return;
+  }
 }
 ?>
